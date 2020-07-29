@@ -157,8 +157,8 @@
 		       destdir="${build}"
 		       classpath="${classpath}"
 			   deprecation="on"
-		       source="1.2"
-			   target="1.2"/>
+		       source="8"
+			   target="8"/>
 	</target>
 	
 	<!-- Compiles with ensuring compatibility if JRE1_2HOME is set -->
@@ -172,8 +172,8 @@
 		       destdir="${build}"
 		       classpath="${classpath}"
 			   deprecation="on"
-		       source="1.2"
-			   target="1.2"
+		       source="8"
+			   target="8"
 		       bootclasspath="${bootclasspath}"/>
 	</target>
 	

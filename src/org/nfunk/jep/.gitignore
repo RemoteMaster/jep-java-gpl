@@ -1,6 +1,11 @@
 JavaCharStream.java
+JJTParserState.java
 ParseException.java
 Parser.java
 Parser.jj
+ParserConstants.java
+ParserTokenManager.java
+ParserTreeConstants.java
+ParserVisitor.java
 Token.java
 TokenMgrError.java
