@@ -214,6 +214,20 @@ public class JepTest extends TestCase {
 		valueTest("00:30 + 00:15", 30*60 + 15*60);
 	}
 
+	public void testQualifiers() throws Exception
+	{
+		System.out.println("\nTesting number qualifiers");
+
+		valueTest("2d", 2*24*60*60);
+		valueTest("2.5d", 2.5*24*60*60);
+		valueTest("2k", 2000);
+		valueTest("2.3k", 2300);
+		valueTest("3M",3000000);
+		valueTest("4G", 4000000000l);
+		valueTest("5m", 5d/1000);
+		valueTest("6u", 6d/1000000);
+		valueTest("7.8n", 7.8d/1000000000);
+	}
 	public void testLogical() throws Exception
 	{
 		System.out.println("\nTesting logical operations");

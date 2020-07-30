@@ -233,7 +233,7 @@ TOKENS
 {
 	< NUMERIC_LITERAL: <INTEGER_LITERAL> | <TIME_LITERAL> | <FLOATING_POINT_LITERAL> >
 |
-	< INTEGER_LITERAL: ["0"-"9"] (["0"-"9"])* >
+	< INTEGER_LITERAL: ["0"-"9"] (["0"-"9"])* (<QUALIFIER>)? >
 |
     < TIME_LITERAL:
         ["0"-"9"](["0"-"9"])? ":" ["0"-"9"]["0"-"9"] |
@@ -241,10 +241,13 @@ TOKENS
     >
 |
 	< FLOATING_POINT_LITERAL:
-		(["0"-"9"])+ "." (["0"-"9"])* (<EXPONENT>)?
+	    (["0"-"9"])+ "." (["0"-"9"])* (<QUALIFIER>)?
+		| (["0"-"9"])+ "." (["0"-"9"])* (<EXPONENT>)?
 		| "." (["0"-"9"])+ (<EXPONENT>)?
 		| (["0"-"9"])+ <EXPONENT>
 	>
+|
+	< #QUALIFIER: ["d","k","K","M","G","m","u","n"] >
 |
 	< #EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+ >
 |

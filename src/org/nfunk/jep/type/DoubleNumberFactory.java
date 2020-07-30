@@ -27,12 +27,16 @@ public class DoubleNumberFactory implements NumberFactory {
 	 *
 	 * @param value The initialization value for the returned object.
 	 */
-	public Object createNumber(String value) {
+	public Object createNumber(String value) throws ParseException
+	{
+		char qualifier;
+		double res;
 		int nextcolon = value.indexOf(':');
+
 		if (nextcolon > 0) {
 			int runner = 0;
 			int parts  = 0;
-			double res = 0;
+			res = 0;
 
 			do {
 				res = res*60d + Double.parseDouble(value.substring(runner,nextcolon));
@@ -45,8 +49,41 @@ public class DoubleNumberFactory implements NumberFactory {
 			if (parts < 2) {
 				res *= 60d;
 			}
-			return res;
+			return new Double(res);
 		}
+
+		qualifier = value.charAt(value.length()-1);
+		if (Character.isLetter(qualifier)) {
+			res = Double.parseDouble(value.substring(0,value.length()-1));
+			switch (qualifier) {
+				case 'd':
+					res *= 24*60*60;
+					break;
+				case 'k':
+				case 'K':
+					res *= 1000;
+					break;
+				case 'M':
+					res *= 1000000;
+					break;
+				case 'G':
+					res *= 1000000000;
+					break;
+				case 'm':
+					res /= 1000;
+					break;
+				case 'u':
+					res /= 1000000;
+					break;
+				case 'n':
+					res /= 1000000000;
+					break;
+				default:
+					throw new ParseException( "unknown qualifier '" + qualifier + "'" );
+			}
+			return new Double(res);
+		}
+
 		return new Double(value);
 	}
 	public Object createNumber(double value) {	return new Double(value);	}
