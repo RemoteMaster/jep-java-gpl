@@ -22,7 +22,7 @@
 
 <project name="JEP" default="compile" basedir=".">
 	
-	<property name="jep-ver" value="2.4.0"/>
+	<property name="jep-ver" value="2.4.0-rm"/>
 	<property name="ext-ver" value="1.1.0"/>
 
 	<!-- library locations -->
