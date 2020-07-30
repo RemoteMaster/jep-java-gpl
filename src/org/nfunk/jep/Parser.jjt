@@ -231,11 +231,14 @@ TOKENS
 
 <*> TOKEN : /* LITERALS */
 {
-	< INTEGER_LITERAL:
-		<DECIMAL_LITERAL>
-	>
+	< NUMERIC_LITERAL: <INTEGER_LITERAL> | <TIME_LITERAL> | <FLOATING_POINT_LITERAL> >
 |
-	< #DECIMAL_LITERAL: ["0"-"9"] (["0"-"9"])* >
+	< INTEGER_LITERAL: ["0"-"9"] (["0"-"9"])* >
+|
+    < TIME_LITERAL:
+        ["0"-"9"](["0"-"9"])? ":" ["0"-"9"]["0"-"9"] |
+        ["0"-"9"](["0"-"9"])? ":" ["0"-"9"]["0"-"9"] ":" ["0"-"9"]["0"-"9"] ("." (["0"-"9"])+)?
+    >
 |
 	< FLOATING_POINT_LITERAL:
 		(["0"-"9"])+ "." (["0"-"9"])* (<EXPONENT>)?
@@ -343,7 +346,6 @@ TOKENS
 |	< RSQ:	"]"	 >	// rjm
 |	< LRND:	"("  >	// rjm
 |	< RRND:	")"	 >	// rjm
-|	< COLON: ":" >	// rjm
 }
 
 
@@ -804,7 +806,7 @@ Object RealConstant() :
   Object value;
 }
 {
-	(t=<INTEGER_LITERAL>	|	t=<FLOATING_POINT_LITERAL>)
+	(t=<NUMERIC_LITERAL>)
 	{
 		try {
 			value = jep.getNumberFactory().createNumber(t.image);

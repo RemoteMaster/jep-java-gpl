@@ -200,7 +200,20 @@ public class JepTest extends TestCase {
 		valueTest("2*6+3",15);		
 		valueTest("2*(6+3)",18);
 	}
-	
+
+	public void testTime() throws Exception
+	{
+		System.out.println("\nTesting time literals");
+
+		valueTest("00:00:30", 30);
+		valueTest("00:30:03", 1803);
+		valueTest("02:30:06", 2*3600+30*60+6);
+		valueTest("2:33", 2*3600+33*60);
+		valueTest("2:30:06", 2*3600+30*60+6);
+		valueTest("0:00:30.5", 30.5);
+		valueTest("00:30 + 00:15", 30*60 + 15*60);
+	}
+
 	public void testLogical() throws Exception
 	{
 		System.out.println("\nTesting logical operations");

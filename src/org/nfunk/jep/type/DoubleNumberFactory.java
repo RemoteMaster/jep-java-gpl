@@ -27,7 +27,28 @@ public class DoubleNumberFactory implements NumberFactory {
 	 *
 	 * @param value The initialization value for the returned object.
 	 */
-	public Object createNumber(String value) {	return new Double(value);	}
+	public Object createNumber(String value) {
+		int nextcolon = value.indexOf(':');
+		if (nextcolon > 0) {
+			int runner = 0;
+			int parts  = 0;
+			double res = 0;
+
+			do {
+				res = res*60d + Double.parseDouble(value.substring(runner,nextcolon));
+				parts++;
+				runner = nextcolon + 1;
+				nextcolon = value.indexOf(':', runner);
+			}
+			while (nextcolon > 0);
+			res = res*60d + Double.parseDouble(value.substring(runner));
+			if (parts < 2) {
+				res *= 60d;
+			}
+			return res;
+		}
+		return new Double(value);
+	}
 	public Object createNumber(double value) {	return new Double(value);	}
 	public Object createNumber(Number value) {	return value;	}
 	public Object createNumber(boolean value) { return (value?ONE:ZERO); }
